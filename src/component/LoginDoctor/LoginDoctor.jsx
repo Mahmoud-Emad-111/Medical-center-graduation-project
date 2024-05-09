@@ -5,22 +5,26 @@ import http from "../http";
 import Cookies from 'react-cookies'
 import   {useNavigate}  from "react-router-dom";
 
-export default function Login() {
+export default function LoginDoctor() {
   const navigate = useNavigate();
   const [Error, setError] = useState(false);
   const { register, handleSubmit,  watch,formState: { errors } } = useForm();
   useEffect(() => {
-      
+        
     const token=Cookies.load('token');
     if (token!==undefined) {
         navigate('/Profile');
     }
+    
+    
 }, []);
   function Login(data){
 
-    http.post('api/Auth/Login',data).then(res=>{
+
+    http.post('api/Doctor/Login',data).then(res=>{
       console.log(res);
       Cookies.save('token', res.data.data.token);
+      Cookies.save('isDoctor', true);
       navigate('/Profile');
     }).catch(
       error=>{
@@ -61,7 +65,6 @@ export default function Login() {
           </button>
           {Error && <p style={p_Style} className="error">Verify your registration information and try again</p>}
 
-          <span className="text-center d-block">Don't have an account? <Link className="text-decoration-none" to="/signup">Sign Up</Link></span>
         </form>
       </div>
     </div>

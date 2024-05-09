@@ -1,4 +1,4 @@
-import React,{useRef} from "react";
+import React,{useEffect, useRef} from "react";
 import { useForm } from "react-hook-form";
 import http from "../http";
 import Cookies from 'react-cookies'
@@ -6,15 +6,27 @@ import   {useNavigate}  from "react-router-dom";
 
 
 export default function Sign_Up() {
-  const navigate = useNavigate();
 
+  
+  
+  const navigate = useNavigate();
+  
   const { register, handleSubmit,  watch,formState: { errors } } = useForm();
+  useEffect(() => {
+        
+    const token=Cookies.load('token');
+    if (token!==undefined) {
+        navigate('/Profile');
+    }
+    
+    
+}, []);
  //////////// Handel Login ////////////////////////
   function Login(data){
     
     http.post('api/Auth/Register',data).then(res=>{
       Cookies.save('token', res.data.data.Token);
-      navigate('/appoint');
+      navigate('/Profile');
     }).catch(
       error=>{
         console.log(error); 

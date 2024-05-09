@@ -13,11 +13,13 @@ import Appointment from './component/Appointment/Appointment';
 import Login from './component/Login/Login';
 import Sign_Up from './component/Sign_up/Sign_Up';
 import Videos from './component/Videos_Ex/Videos';
-import LoginAdmin from './component/LoginAdmin/LoginAdmin';
 import Dashboard from './component/Dashboard/Dashboard';
 import AddDoctor from './component/AddDoctor/AddDoctor';
 import AddNurse from './component/AddNurse/AddNurse';
 import AddPatient from './component/AddPatient/AddPatient';
+import Chat from './component/Chat/Chat';
+import Profile from './component/Profile/Profile';
+import LoginDoctor from './component/LoginDoctor/LoginDoctor';
 let routers=createBrowserRouter([
   {
     path:"",
@@ -72,8 +74,8 @@ let routers=createBrowserRouter([
 
       },
       {
-        path:"/loginAdmin",
-        element:<LoginAdmin/>
+        path:"/loginDoctor",
+        element:<LoginDoctor/>
 
       },
       {
@@ -91,6 +93,17 @@ let routers=createBrowserRouter([
         element:<Videos/>
 
       },
+      {
+        path:"/Chat/:id",
+        element:<Chat />
+
+      },
+      {
+        path:"/Profile",
+        element:<Profile />
+
+      },
+
       {
         path:"*",
         element:<NotFound/>

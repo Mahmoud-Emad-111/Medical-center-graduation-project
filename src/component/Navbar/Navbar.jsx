@@ -1,7 +1,50 @@
 
 import { Link, NavLink } from 'react-router-dom';
+import Cookies from 'react-cookies';
+import { useEffect, useState } from 'react';
+
+
+
 export default function Navbar() {
-;
+  const [isLogin, setisLogin] = useState(false);
+  
+  useEffect(() => {
+    if (Cookies.load('token') !== undefined) {
+      setisLogin(true)
+
+    }
+    
+  }, []);
+
+  function CheckLogin(){
+    if (isLogin) {
+      return (
+        <>
+            <li className='text-center'>
+          <Link className='text-text-decoration-none btn bg-main' to="/Profile" >
+          Profile
+          </Link>
+          </li>
+        </>
+      )
+    }else{
+        return (
+          <>
+            <li className='text-center'>
+              <Link className='text-text-decoration-none btn bg-main ' to="/login" >
+              User
+              </Link>
+              </li>
+              <hr />
+              <li className='text-center'>
+              <Link className='text-text-decoration-none btn bg-main' to="/loginDoctor" >
+              Doctor
+              </Link>
+            </li>
+          </>
+        )
+    }
+  }
 
   return (
     <>
@@ -35,17 +78,8 @@ export default function Navbar() {
     <i className="fa-solid fa-user" />
   </NavLink>
   <ul className="dropdown-menu dropdown-menu-end">
-   <li className='text-center'>
-   <Link className='text-text-decoration-none btn bg-main ' to="/login" >
-    User
-    </Link>
-   </li>
-   <hr />
-   <li className='text-center'>
-    <Link className='text-text-decoration-none btn bg-main' to="/loginAdmin" >
-    Admin
-    </Link>
-   </li>
+    {  CheckLogin() }
+
   </ul>
 </li>
 
