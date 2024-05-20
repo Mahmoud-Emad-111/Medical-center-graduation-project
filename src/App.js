@@ -20,6 +20,8 @@ import AddPatient from './component/AddPatient/AddPatient';
 import Chat from './component/Chat/Chat';
 import Profile from './component/Profile/Profile';
 import LoginDoctor from './component/LoginDoctor/LoginDoctor';
+import Profile_Doctor from './component/Profile_Doctor/Profile_Doctor';
+import ChatDoctor from './component/ChatDoctor/ChatDoctor';
 let routers=createBrowserRouter([
   {
     path:"",
@@ -94,6 +96,11 @@ let routers=createBrowserRouter([
 
       },
       {
+        path:"/chatDoctor/:id",
+        element:<ChatDoctor />
+
+      },
+      {
         path:"/Chat/:id",
         element:<Chat />
 
@@ -101,6 +108,11 @@ let routers=createBrowserRouter([
       {
         path:"/Profile",
         element:<Profile />
+
+      },
+      {
+        path:"/ProfileDoctor",
+        element:<Profile_Doctor />
 
       },
 

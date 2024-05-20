@@ -20,10 +20,14 @@ export default function Profile() {
         if (token===undefined) {
             navigate('/');
         }else{
+            if (localStorage.getItem('isDoctor')) {
+            navigate('/ProfileDoctor');
 
+            }
             http.defaults.headers.common = {'Authorization': `Bearer ${token}`}
     
             http.get('api/Auth/Profile',{token}).then(res=>{
+             localStorage.setItem('id',res.data.id)
                 
                 setData(res.data)
             })
@@ -61,7 +65,7 @@ export default function Profile() {
             
             {
                 Doctors.map((item)=>{
-                  return  <DoctorCart id={item.id} name={item.name} email={item.email} image={item.image}/>
+                  return  <DoctorCart Chat={'Chat'} id={item.id} name={item.name} email={item.email} image={item.image}/>
                 })
             }
         </div>

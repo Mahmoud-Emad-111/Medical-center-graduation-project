@@ -13,7 +13,7 @@ export default function LoginDoctor() {
         
     const token=Cookies.load('token');
     if (token!==undefined) {
-        navigate('/Profile');
+        navigate('/ProfileDoctor');
     }
     
     
@@ -22,10 +22,10 @@ export default function LoginDoctor() {
 
 
     http.post('api/Doctor/Login',data).then(res=>{
-      console.log(res);
+      localStorage.setItem('id',res.data.data.token)
+      localStorage.setItem('isDoctor', true);
       Cookies.save('token', res.data.data.token);
-      Cookies.save('isDoctor', true);
-      navigate('/Profile');
+      navigate('/ProfileDoctor');
     }).catch(
       error=>{
         if (error.response.status===401) {

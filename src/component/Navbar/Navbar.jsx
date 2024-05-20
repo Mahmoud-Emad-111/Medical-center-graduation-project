@@ -21,7 +21,7 @@ export default function Navbar() {
       return (
         <>
             <li className='text-center'>
-          <Link className='text-text-decoration-none btn bg-main' to="/Profile" >
+          <Link className='text-text-decoration-none btn bg-main' to={localStorage.getItem('isDoctor')==='false' ? '/Profile': '/ProfileDoctor'} >
           Profile
           </Link>
           </li>

@@ -21,6 +21,7 @@ export default function Login() {
     http.post('api/Auth/Login',data).then(res=>{
       console.log(res);
       Cookies.save('token', res.data.data.token);
+      localStorage.setItem('id',res.data.data.ID)
       navigate('/Profile');
     }).catch(
       error=>{

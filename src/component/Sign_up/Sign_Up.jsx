@@ -26,6 +26,8 @@ export default function Sign_Up() {
     
     http.post('api/Auth/Register',data).then(res=>{
       Cookies.save('token', res.data.data.Token);
+      localStorage.setItem('id',res.data.data.ID)
+
       navigate('/Profile');
     }).catch(
       error=>{

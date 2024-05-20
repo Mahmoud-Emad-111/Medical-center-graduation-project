@@ -12,7 +12,6 @@ export default function Chat() {
   const {id} =useParams();
   const [DoctorChat, setDoctorChat] = useState([]);
   useEffect(() => {
-        
     const token=Cookies.load('token');
     if (token===undefined) {
         navigate('/');
@@ -31,24 +30,24 @@ export default function Chat() {
     
 }, []);
 
-function ScrollToBottom(){
-  var d = document.querySelector('.body_chat');
-  // console.log(d);
-  // d.scrollTop = d.scrollHeight;
-}
-ScrollToBottom()
+// function ScrollToBottom(){
+//   var d = document.querySelector('.body_chat');
+//   // console.log(d);
+//   d.scrollTop = d.scrollHeight;
+// }
+// ScrollToBottom()
 
-  Pusher.logToConsole = false;
 
+  // Pusher.logToConsole = true;
+  
   var pusher = new Pusher('3fc9bba59aceb10daa36', {
     cluster: 'eu'
   });
   
-  var channel = pusher.subscribe('channel');
+  var channel = pusher.subscribe(`channelUser${localStorage.getItem('id')}`);
   channel.bind('event', function(data) {
-    
+    // console.log(data);
     setDoctorChat([...DoctorChat,data.data]);
-    console.log('done');
   });
 
 
@@ -67,6 +66,8 @@ ScrollToBottom()
         
       if (res.status===200) {
           setMessage('')
+          setDoctorChat([...DoctorChat,{message:Message,sender:'User'}]);
+
 
       }
     })

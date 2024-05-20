@@ -11,7 +11,7 @@ export default function DoctorCart(props) {
         <h3>{props.name}</h3>
         <span>{props.email}</span>
         </div>
-        <Link to={`/Chat/${props.id}`}>Chat</Link>
+        <Link to={`/${props.Chat}/${props.id}`}>Chat</Link>
         </div>
     </div>
   )
