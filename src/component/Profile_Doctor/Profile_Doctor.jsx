@@ -44,6 +44,7 @@ export default function Profile_Doctor() {
           console.log(res);
       })
       Cookies.remove('token')
+      localStorage.removeItem('isDoctor');
 
       navigate('/');
   }

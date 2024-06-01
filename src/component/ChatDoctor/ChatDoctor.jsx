@@ -5,12 +5,14 @@ import { useNavigate } from "react-router";
 import Cookies from 'react-cookies'
 import http from '../http';
 import Pusher from 'pusher-js';
+import { all } from 'axios';
 
 export default function ChatDoctor() {
     const [Message, setMessage] = useState([]);
     const navigate = useNavigate();
     const {id} =useParams();
     const [UserChat, setUserChat] = useState([]);
+    let allMessage=[];
     useEffect(() => {
       const token=Cookies.load('token');
       if (token===undefined) {
@@ -46,10 +48,13 @@ export default function ChatDoctor() {
     
     var channel = pusher.subscribe(`channelDoctor${localStorage.getItem('id')}`);
     channel.bind('event', function(data) {
-      // console.log(data);
-      setUserChat([...UserChat,data.data]);
+    //   AddMessageToState(data.data)
+    allMessage.push(data.data)
+
+      setUserChat(allMessage);
     });
-  
+    
+
   
     function Send_message(e){
       e.preventDefault();
@@ -81,10 +86,10 @@ export default function ChatDoctor() {
             <div className='item_chat'>
             
             {
-                UserChat.map((e)=>{
+                UserChat.map((e,index)=>{
   
                     
-                      return e.sender=='User' ?    <div  className='receiver'>{e.message}</div> : <div  className='sender'>{e.message}</div>;
+                      return e.sender=='User' ?    <div  key={index} className='receiver'>{e.message}</div> : <div  key={index} className='sender'>{e.message}</div>;
                     })
                   }
   
